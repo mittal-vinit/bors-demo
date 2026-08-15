@@ -1,0 +1,4 @@
+status = ["build"]
+use_squash_merge = true
+delete_merged_branches = true
+timeout_sec = 600

@@ -1,10 +1,9 @@
 status = ["build"]
 enable_stacks = true
-use_squash_merge = true
+use_squash_merge = false
 delete_merged_branches = true
 timeout_sec = 600
 max_batch_size = 4
 block_labels = ["bors-failed"]
 pr_status = ["build"]
-use_squash_merge = false
 # use_codeowners = true

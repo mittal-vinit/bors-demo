@@ -7,4 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "ok"
+      - name: build
+        run: |
+          if [ -f FAIL ]; then echo "failing on purpose"; exit 1; fi
+          echo ok

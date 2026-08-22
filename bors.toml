@@ -4,6 +4,6 @@ use_squash_merge = true
 delete_merged_branches = true
 timeout_sec = 600
 max_batch_size = 4
-block_labels = ["bors-failed"]
+block_labels = ["bors-failed", "wip", "do-not-merge"]
 pr_status = ["build"]
 use_codeowners = true

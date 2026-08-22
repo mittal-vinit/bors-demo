@@ -1,5 +1,8 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    branches: [main, staging, trying]
+  pull_request:
 
 jobs:
   build:
@@ -9,5 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: build
         run: |
-          if [ -f FAIL ]; then echo "failing on purpose"; exit 1; fi
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "poison pill"; exit 1
+          fi
           echo ok

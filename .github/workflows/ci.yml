@@ -9,5 +9,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: build
         run: |
-          if [ -f FAIL ]; then echo "failing on purpose"; exit 1; fi
+          if [ -f FAIL ]; then echo "failing (FAIL file)"; exit 1; fi
+          if [ "${{ vars.FORCE_FAIL }}" = "true" ]; then echo "failing (FORCE_FAIL var)"; exit 1; fi
           echo ok

@@ -4,11 +4,15 @@ on: [push, pull_request]
 jobs:
   build:
     name: build
+    # Mirrors django-rest-api: the base branch does not repeat the PR-type
+    # work, so this job reports "skipped" on main while really running on
+    # staging. Both land on the same commit once bors fast-forwards main.
+    if: github.ref_name != 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: build
         run: |
           if [ -f FAIL ]; then echo "failing (FAIL file)"; exit 1; fi
-          if [ "${{ vars.FORCE_FAIL }}" = "true" ]; then echo "failing (FORCE_FAIL var)"; exit 1; fi
+          if [ "${{ vars.FORCE_FAIL }}" = "true" ]; then echo "failing (FORCE_FAIL)"; exit 1; fi
           echo ok

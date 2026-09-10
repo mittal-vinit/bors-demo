@@ -15,4 +15,12 @@ jobs:
         run: |
           if [ -f FAIL ]; then echo "failing (FAIL file)"; exit 1; fi
           if [ "${{ vars.FORCE_FAIL }}" = "true" ]; then echo "failing (FORCE_FAIL)"; exit 1; fi
+          # A change that passes on its own pull request but breaks, or
+          # stalls, once bors builds it into a batch on staging or trying.
+          case "${{ github.ref_name }}" in
+            staging*|trying*)
+              if [ -f STAGEFAIL ]; then echo "failing on ${{ github.ref_name }} (STAGEFAIL)"; exit 1; fi
+              if [ -f SLOW ]; then echo "stalling on ${{ github.ref_name }} (SLOW)"; sleep 420; fi
+              ;;
+          esac
           echo ok
